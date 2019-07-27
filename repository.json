@@ -1,5 +1,5 @@
 {
     "name": "Gree HVAC MQTT bridge",
-    "url": "https://github.com/arthurkrupa/gree-hvac-mqtt-bridge",
-    "maintainer": "Arthur Krupa <arthurkrupa@users.noreply.github.com>"
+    "url": "https://github.com/rguisewite/gree-hvac-mqtt-bridge",
+    "maintainer": "Ryan Guisewite <rguisewite@users.noreply.github.com>"
 }
