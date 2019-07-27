@@ -21,6 +21,7 @@ class Device {
     //  Set defaults
     this.options = {
       host: options.host || '192.168.1.255',
+      temperatureUnit: options.temperatureUnit === cmd.temperatureUnit.value.celsius ? cmd.temperatureUnit.value.celsius : cmd.temperatureUnit.value.fahrenheit,
       onStatus: options.onStatus || function () {},
       onUpdate: options.onUpdate || function () {},
       onConnected: options.onConnected || function () {}
@@ -234,9 +235,9 @@ class Device {
   /**
      * Set temperature
      * @param {number} value Temperature
-     * @param {number} [unit=0] Units (defaults to Celsius)
+     * @param {number} [unit=0] Units (defaults to Fahrenheit)
      */
-  setTemp (value, unit = cmd.temperatureUnit.value.celsius) {
+  setTemp (value, unit = cmd.temperatureUnit.value.fahrenheit) {
     this._sendCommand(
       [cmd.temperatureUnit.code, cmd.temperature.code],
       [unit, value]

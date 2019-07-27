@@ -16,6 +16,7 @@ Make sure you have NodeJS (>=8.11.0) installed and run the following (adjust the
 npm install
 node index.js \
     --hvac-host="192.168.1.255" \
+    --hvac-temperature-units="F" \
     --mqtt-broker-url="mqtt://localhost" \
     --mqtt-topic-prefix="home/greehvac" \
     --mqtt-username="" \

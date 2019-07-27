@@ -4,7 +4,7 @@
 const mqtt = require('mqtt')
 const commands = require('./app/commandEnums')
 const argv = require('minimist')(process.argv.slice(2), {
-  string: ['hvac-host', 'mqtt-broker-url', 'mqtt-topic-prefix', 'mqtt-username', 'mqtt-password'],
+  string: ['hvac-host', 'hvac-temperature-unit', 'mqtt-broker-url', 'mqtt-topic-prefix', 'mqtt-username', 'mqtt-password'],
   '--': true
 })
 
@@ -53,6 +53,7 @@ const publishIfChanged = function (stateProp, newValue, mqttTopic) {
 
 const deviceOptions = {
   host: argv['hvac-host'],
+  temperatureUnit: argv['hvac-temperature-unit'] === 'C' ? commands.temperatureUnit.value.celsius : temperatureUnit.value.fahrenheit,
   onStatus: (deviceModel) => {
     publishIfChanged('temperature', deviceModel.props[commands.temperature.code].toString(), '/temperature/get')
     publishIfChanged('fanSpeed', getKeyByValue(commands.fanSpeed.value, deviceModel.props[commands.fanSpeed.code]).toString(), '/fanspeed/get')
@@ -137,7 +138,7 @@ client.on('message', (topic, message) => {
 
   switch (topic) {
     case mqttTopicPrefix + '/temperature/set':
-      hvac.setTemp(parseInt(message))
+      hvac.setTemp(parseInt(message), deviceOptions.temperatureUnit)
       return
     case mqttTopicPrefix + '/mode/set':
       if (message === 'off') {
