@@ -16,10 +16,21 @@ module.exports = function (defaultKey = 'a3K8Bx%2r8Y7#xDh') {
          * @param {string} [key] AES key
          */
     decrypt: (input, key = defaultKey) => {
-      const decipher = crypto.createDecipheriv('aes-128-ecb', key, '')
-      const str = decipher.update(input.pack, 'base64', 'utf8')
-      const response = JSON.parse(str + decipher.final('utf8'))
-      return response
+      var response;
+
+      const decipher  = crypto.createDecipheriv('aes-128-ecb', key, '');
+      const str       = decipher.update(input.pack, 'base64', 'utf8');
+
+      try
+      {
+        response = JSON.parse(str + decipher.final('utf8'));
+      }
+      catch ( e )
+      {
+        response = {}
+      }
+
+      return response;
     },
 
     /**

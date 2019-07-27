@@ -55,7 +55,12 @@ const deviceOptions = {
   host: argv['hvac-host'],
   temperatureUnit: argv['hvac-temperature-unit'] === 'C' ? commands.temperatureUnit.value.celsius : commands.temperatureUnit.value.fahrenheit,
   onStatus: (deviceModel) => {
-    publishIfChanged('temperature', deviceModel.props[commands.temperature.code].toString(), '/temperature/get')
+    var temperature;
+
+    if ( deviceModel.props[commands.temperatureUnit.code] === commands.temperatureUnit.value.fahrenheit ) temperature = ( deviceModel.props[commands.temperature.code] * ( 9 / 5 ) ) + 32;
+    else                                                                                                  temperature = deviceModel.props[commands.temperature.code];
+
+    publishIfChanged('temperature', temperature.toString(), '/temperature/get')
     publishIfChanged('fanSpeed', getKeyByValue(commands.fanSpeed.value, deviceModel.props[commands.fanSpeed.code]).toString(), '/fanspeed/get')
     publishIfChanged('swingHor', getKeyByValue(commands.swingHor.value, deviceModel.props[commands.swingHor.code]).toString(), '/swinghor/get')
     publishIfChanged('swingVert', getKeyByValue(commands.swingVert.value, deviceModel.props[commands.swingVert.code]).toString(), '/swingvert/get')
