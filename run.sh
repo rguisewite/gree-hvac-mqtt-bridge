@@ -20,7 +20,7 @@ if [ "$INSTANCES" -gt 0 ]; then
 		MQTT_TOPIC_PREFIX=$(jq -r ".devices[$i].mqtt_topic_prefix" $CONFIG_PATH);
 		if [[ $HVAC_HOST = null ]]; then echo "[ERROR] Missing hvac_host for device $i. Skipping." && continue; fi
 		if [[ $MQTT_TOPIC_PREFIX = null ]]; then echo "[ERROR] Missing mqtt_topic_prefix for device $i. Skipping." && continue; fi
-		if [[ $HVAC_TEMPERATURE_UNIT = null ]]; then HVAC_TEMPERATURE_UNIT="F" fi
+		if [[ $HVAC_TEMPERATURE_UNIT = null ]]; then HVAC_TEMPERATURE_UNIT="F"; fi
 		echo "Running instance $i for $HVAC_HOST"
 		npx pm2 start index.js --silent -m --merge-logs --name="HVAC_${i}" -- \
 			--hvac-host="${HVAC_HOST}" \
