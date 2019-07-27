@@ -53,7 +53,7 @@ const publishIfChanged = function (stateProp, newValue, mqttTopic) {
 
 const deviceOptions = {
   host: argv['hvac-host'],
-  temperatureUnit: argv['hvac-temperature-unit'] === 'C' ? commands.temperatureUnit.value.celsius : temperatureUnit.value.fahrenheit,
+  temperatureUnit: argv['hvac-temperature-unit'] === 'C' ? commands.temperatureUnit.value.celsius : commands.temperatureUnit.value.fahrenheit,
   onStatus: (deviceModel) => {
     publishIfChanged('temperature', deviceModel.props[commands.temperature.code].toString(), '/temperature/get')
     publishIfChanged('fanSpeed', getKeyByValue(commands.fanSpeed.value, deviceModel.props[commands.fanSpeed.code]).toString(), '/fanspeed/get')

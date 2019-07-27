@@ -148,10 +148,12 @@ Correct config example:
 "devices": [
   {
     "hvac_host": "192.168.0.255",
+    "hvac_temperature_unit": "F",
     "mqtt_topic_prefix": "/home/hvac01"
   },
   {
     "hvac_host": "192.168.0.254",
+    "hvac_temperature_unit": "F",
     "mqtt_topic_prefix": "/home/hvac02"
   }
 ]
@@ -170,6 +172,10 @@ echo -n "{\"psw\": \"YOUR_WIFI_PASSWORD\",\"ssid\": \"YOUR_WIFI_SSID\",\"t\": \"
 Note: This command may vary depending on your OS (e.g. Linux, macOS, CygWin). If facing problems, please consult the appropriate netcat manual.
 
 ## Changelog
+
+[1.2.3/1.2.4]
+
+- Adding temperatureUnits as a configurable state through config.json
 
 [1.2.2]
 
