@@ -55,7 +55,7 @@ const deviceOptions =
 	{
 		var extended_mode, displayed_temperature;
 
-		if ( deviceModel.props[ commands.temperatureUnit.code ] === commands.temperatureUnit.value.fahrenheit )	displayed_temperature = Math.round( ( deviceModel.props[ commands.temperature.code ] * ( 9 / 5 ) ) + 32 );
+		if ( deviceModel.props[ commands.temperatureUnit.code ] === commands.temperatureUnit.value.fahrenheit )	displayed_temperature = ( ( deviceModel.props[ commands.temperature.code ] * ( 9 / 5 ) ) + 32 );
 		else                                                                                                 	displayed_temperature = deviceModel.props[ commands.temperature.code ];
 
 		//
@@ -67,7 +67,7 @@ const deviceOptions =
 		extended_mode = ( deviceModel.props[ commands.power.code ] === commands.power.value.on ) ? getKeyByValue( commands.mode.value, deviceModel.props[ commands.mode.code ] ).toString() : 'off';
 
 		publishIfChanged( 'mode',			extended_mode,																							'/mode/get' );
-		publishIfChanged( 'temperature',	displayed_temperature.toString(),																		'/temperature/get' );
+		publishIfChanged( 'temperature',	displayed_temperature.toFixed( 1 ),																		'/temperature/get' );
 		publishIfChanged( 'fanSpeed',		getKeyByValue( commands.fanSpeed.value,		deviceModel.props[ commands.fanSpeed.code ] ).toString(),	'/fanspeed/get' );
 		publishIfChanged( 'swingHor',		getKeyByValue( commands.swingHor.value,		deviceModel.props[ commands.swingHor.code ] ).toString(),	'/swinghor/get' );
 		publishIfChanged( 'swingVert',		getKeyByValue( commands.swingVert.value,	deviceModel.props[ commands.swingVert.code ] ).toString(),	'/swingvert/get' );
