@@ -55,10 +55,8 @@ const deviceOptions =
 	{
 		var extended_mode, displayed_temperature;
 
-		if ( deviceModel.props[ commands.temperatureUnit.code ] === commands.temperatureUnit.value.fahrenheit )	displayed_temperature = ( deviceModel.props[ commands.temperature.code ] * ( 9 / 5 ) ) + 32;
+		if ( deviceModel.props[ commands.temperatureUnit.code ] === commands.temperatureUnit.value.fahrenheit )	displayed_temperature = Math.round( ( deviceModel.props[ commands.temperature.code ] * ( 9 / 5 ) ) + 32 );
 		else                                                                                                 	displayed_temperature = deviceModel.props[ commands.temperature.code ];
-
-		console.log( 'Getting temperature.', 'Original Temperature:', deviceModel.props[ commands.temperature.code ], 'Displayed Temperature:', displayed_temperature, 'Unit:', deviceModel.props[ commands.temperatureUnit.code ] );
 
 		//
 		// Handle "off" mode status
@@ -172,9 +170,7 @@ client.on( 'message', function( topic, message )
 		case mqttTopicPrefix + '/turbo/set': 		hvac.setTurbo( parseInt( message ) );						return;
 		case mqttTopicPrefix + '/temperature/set':
 			if ( deviceOptions.temperatureUnit === commands.temperatureUnit.value.celsius ) set_temperature = parseInt( message );
-			else                                                                            set_temperature = ( parseInt( message ) - 32 ) * ( 5 / 9 );
-
-			console.log( 'Setting temperature.', 'Original Temperature:', parseInt( message ), 'Altered Temperature:', set_temperature, 'Unit:', deviceOptions.temperatureUnit );
+			else                                                                            set_temperature = Math.round( ( parseInt( message ) - 32 ) * ( 5 / 9 ) );
 
 			hvac.setTemp( set_temperature, deviceOptions.temperatureUnit );
 
