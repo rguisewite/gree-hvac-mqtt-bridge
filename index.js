@@ -11,24 +11,7 @@ function getKeyByValue( object, value )
 }
 
 const mqttTopicPrefix = argv[ 'mqtt-topic-prefix' ];
-
-const deviceState =
-{
-	temperature: null,
-	fanSpeed: null,
-	swingHor: null,
-	swingVert: null,
-	power: null,
-	health: null,
-	powerSave: null,
-	lights: null,
-	quiet: null,
-	blow: null,
-	air: null,
-	sleep: null,
-	turbo: null,
-	mode: null
-}
+var deviceState = new Object();
 
 /**
  * Check if incoming device setting differs from last state and publish change if yes
