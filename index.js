@@ -170,10 +170,11 @@ client.on( 'message', function( topic, message )
 		case mqttTopicPrefix + '/turbo/set': 		hvac.setTurbo( parseInt( message ) );						return;
 		case mqttTopicPrefix + '/temperature/set':
 			if ( deviceOptions.temperatureUnit === commands.temperatureUnit.value.celsius ) set_temperature = parseInt( message );
-			else                                                                            set_temperature = ( parseInt( message ) − 32 ) * ( 5 / 9 );
+			else                                                                            set_temperature = ( parseInt( message ) - 32 ) * ( 5 / 9 );
 
 			hvac.setTemp( set_temperature, deviceOptions.temperatureUnit );
-			return
+
+			return;
 		case mqttTopicPrefix + '/mode/set':
 			if ( message === 'off' )
 			{
@@ -190,7 +191,7 @@ client.on( 'message', function( topic, message )
 				hvac.setMode( commands.mode.value[ message ] );
 			}
 
-			return
+			return;
 	}
 
 	console.log( '[MQTT] No handler for topic %s', topic );
