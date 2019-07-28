@@ -49,7 +49,6 @@ const deviceOptions =
 
 		extended_mode = ( deviceModel.props[ commands.power.code ] === commands.power.value.on ) ? getKeyByValue( commands.mode.value, deviceModel.props[ commands.mode.code ] ).toString() : 'off';
 
-		publishIfChanged( 'mode',			extended_mode,																							'/mode/get' );
 		publishIfChanged( 'temperature',	displayed_temperature.toFixed( 1 ),																		'/temperature/get' );
 		publishIfChanged( 'fanSpeed',		getKeyByValue( commands.fanSpeed.value,		deviceModel.props[ commands.fanSpeed.code ] ).toString(),	'/fanspeed/get' );
 		publishIfChanged( 'swingHor',		getKeyByValue( commands.swingHor.value,		deviceModel.props[ commands.swingHor.code ] ).toString(),	'/swinghor/get' );
@@ -63,6 +62,7 @@ const deviceOptions =
 		publishIfChanged( 'air',			getKeyByValue( commands.air.value,			deviceModel.props[ commands.air.code ] ).toString(),		'/air/get' );
 		publishIfChanged( 'sleep',			getKeyByValue( commands.sleep.value,		deviceModel.props[ commands.sleep.code ] ).toString(),		'/sleep/get' );
 		publishIfChanged( 'turbo',			getKeyByValue( commands.turbo.value,		deviceModel.props[ commands.turbo.code ] ).toString(),		'/turbo/get' );
+		publishIfChanged( 'mode',			extended_mode,																							'/mode/get' );
 	},
 	onUpdate: function( deviceModel )
 	{
